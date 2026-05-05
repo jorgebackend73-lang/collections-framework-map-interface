@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 
@@ -40,39 +41,21 @@ public class App {
     	
     	// Creacion del mapa a partir del listado de argumentos:
     	
-    	// cuando vas a declarar una varible usada en varias Map -> java.util 
-    	// -> <K (clave), V (valor)> nombre mapa = m
-    	// mapa usa metodo put para meter datos, hay que reservar memoria Hash > esto no permite ordenar
-    	// por eso habrá que pasarlo a tree map para ordenalo. No hace falta pasar a HashMap los tipos
-    	// de datos, ya se los pasmos y los puede inferir de Map<String, Integer>
+    	// este mapa se obtiene de recorrer el mapa usando el flujo stream
+    	// objetivo obtener nuevo valor o nueva coleccion(mapa) como en este caso
+    	// de nuevo con los nombes en la clave y la cantidad de veces que aparecen
+    	// en el valor.
+    	// esta vez usamos el metodo collect para recoger los nombres que pasan por
+    	// la tubería creada por stream. Collectors es la clase que implementa los
+    	// metodos del metodo collect y el que no vale es el de groupingby para agrupar
+    	// lo que va pasando por la tubería y meterlo en la calve del mapa, coge el nombre
+    	// de la tubería y lo devuelve con la lambda y para contar otro collector con su
+    	// metodo counting, pero esto devuelve un Long en vez de un Integer y ha que cambiarlo
+    	// en el tipo de dato que ocupara la posición de valor de nuestro mapa.
     	
-    	Map<String, Integer> m = new HashMap<>(); // Mapa declarado, pero vacio. 
-    	
-    	// Recorremos la lista de argumentos con for mejorado, iterdor, stream u operciones de agregado,
-    	// para llenar nuestro Map. 
-    	// Primer caso artesanal usando for mejorado.
-    	
-    	Integer frecuenciaOcurrencia = null;
-    	
-    	for (String nombre : listadoDeArgumentos) {
-    		
-    	// Primero preguntar si Rodrigo está en el Map m, como no está, saldrá null y se guardará como clave 
-    	// dandole valor 1.
-    	// Si lo vuelve a recibir, la clave no se modificará, pero si el valor a 2 (+1) y así sucesivamente y 
-    	//	con cada valor diferente.
-    		
-    		frecuenciaOcurrencia = m.get(nombre);
-    		
-    		// agregamos clave y valor con put y al valor le metemos un 1 con operador ternario, 
-    		// pero si ya está entonces incrementamos en 1 frecuenciadeOcurrencia con operador 
-    		// de autoincremento (lo ponemos delante para asegurar q solo incrementa en uno cada vez).
-    		
-    		m.put(nombre, frecuenciaOcurrencia == null ? 1 : ++frecuenciaOcurrencia);
-    
-    	
-    	}
-    	
-    	System.out.println("Mapa resultante: " + m);
+    	Map<String, Long> m = listadoDeArgumentos.stream()
+    			.collect(Collectors.groupingBy(nombre -> nombre,
+    					Collectors.counting()));
     	
     }
 }
