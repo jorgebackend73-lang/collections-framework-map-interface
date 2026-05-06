@@ -81,7 +81,7 @@ public class App {
     	
     	System.out.println(m);
     	
-    	// Sub variante #2
+    	// Sub variante #2 que es la que recomienda el profe.
     	
     	var m2 = listadoDeArgumentos.stream()
     			.collect(Collectors.groupingBy(nombre -> nombre, 
