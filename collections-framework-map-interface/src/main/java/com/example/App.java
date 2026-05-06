@@ -1,9 +1,9 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -43,7 +43,7 @@ public class App {
     	
     	// este mapa se obtiene de recorrer el mapa usando el flujo stream
     	// objetivo obtener nuevo valor o nueva coleccion(mapa) como en este caso
-    	// de nuevo con los nombes en la clave y la cantidad de veces que aparecen
+    	// de nuevo con los nombres en la clave y la cantidad de veces que aparecen
     	// en el valor.
     	// esta vez usamos el metodo collect para recoger los nombres que pasan por
     	// la tubería creada por stream. Collectors es la clase que implementa los
@@ -53,11 +53,40 @@ public class App {
     	// metodo counting, pero esto devuelve un Long en vez de un Integer y ha que cambiarlo
     	// en el tipo de dato que ocupara la posición de valor de nuestro mapa.
     	
+    	/* 
+    	 * Esta resulta que es la variante # 2
     	Map<String, Long> m = listadoDeArgumentos.stream()
     			.collect(Collectors.groupingBy(nombre -> nombre,
     					Collectors.counting()));
     	
     	System.out.println("Mapa resultante: " + m);
+    	*/
     	
+    	Map<String, Long> m = null;
+    	
+    	// Variante #1 creacion Mapa lo recorremos por todos sus argumentos usando
+    	// operaciones de agregado (tubería, metodos de la clase Stream, Lambda,
+    	// metodos por referencia,... en fin Programación Funcional.
+    	
+    	// Clase collector te da la mayoría de los metodos. Al final de la tubería con los elementos
+    	// que recibe te permite crear la coleccion que necesitas.
+    	
+    	// la palabra que llegue metela en el mapa con groupingBy e identity
+    	// despues con counting cuenta lo que pasa por la tubería.
+    	// Y todo ello asignado a m (nuestro Mapa) desde el principio.
+    	    	
+    	m = listadoDeArgumentos.stream()
+    		.collect(Collectors.groupingBy(Function.identity(),
+    				Collectors.counting()));
+    	
+    	System.out.println(m);
+    	
+    	// Sub variante #2
+    	
+    	var m2 = listadoDeArgumentos.stream()
+    			.collect(Collectors.groupingBy(nombre -> nombre, 
+    					Collectors.counting()));
+    	
+    	System.out.println(m2);
     }
 }
