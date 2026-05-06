@@ -57,5 +57,7 @@ public class App {
     			.collect(Collectors.groupingBy(nombre -> nombre,
     					Collectors.counting()));
     	
+    	System.out.println("Mapa resultante: " + m);
+    	
     }
 }
