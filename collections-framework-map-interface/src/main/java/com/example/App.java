@@ -1,5 +1,9 @@
 package com.example;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -88,5 +92,152 @@ public class App {
     					Collectors.counting()));
     	
     	System.out.println(m2);
+    	
+    	/* 
+    	 * Creación de una lista de empleados
+    	 * 
+    	 * con = new ArrayList reservamos espacio en memoria para nuestros
+    	 * empleados
+    	 * */
+    	
+    	List<Empleado> empleados = new ArrayList<Empleado>(); // En List<? extends Persona> para meter cualquier tipo de dato Persona, genericidad
+    	// si usamos esa genericidad tendriamos que poner un filtro al stream para que deje pasar
+    	// solo los tipos de datos, empleados en este caso que buscamos.
+    	
+    	
+    	// creamos los empleados (objetos)
+    	Empleado emp1 = Empleado.builder()
+    			.nombre("Jorge Francisco")
+    			.primerApellido("Alborch")
+    			.segundoApellido("Villar")
+    			.genero(Genero.HOMBRE)
+    			.fechaNacimiento(LocalDate.of(1973, Month.JULY, 23))
+    			.dpto(Dpto.INFORMATICA)
+    			.salario(new BigDecimal(3500.50))
+    			.fechaAlta(LocalDate.of(1990, Month.SEPTEMBER, 22))
+    			.build();
+    	Empleado emp2 = Empleado.builder()
+    			.nombre("Andres")
+    			.primerApellido("Alonso")
+    			.segundoApellido("Pelaez")
+    			.genero(Genero.HOMBRE)
+    			.fechaNacimiento(LocalDate.of(1983, Month.SEPTEMBER, 23))
+    			.dpto(Dpto.INFORMATICA)
+    			.salario(new BigDecimal(3400.50))
+    			.fechaAlta(LocalDate.of(1995, Month.SEPTEMBER, 22))
+    			.build();
+    	Empleado emp3 = Empleado.builder()
+    			.nombre("Jeronimo")
+    			.primerApellido("Arenal")
+    			.segundoApellido("gomez")
+    			.genero(Genero.HOMBRE)
+    			.fechaNacimiento(LocalDate.of(1968, Month.OCTOBER, 20))
+    			.dpto(Dpto.CONTABILIDAD)
+    			.salario(new BigDecimal(3600.50))
+    			.fechaAlta(LocalDate.of(1977, Month.JANUARY, 4))
+    			.build();
+    	Empleado emp4 = Empleado.builder()
+    			.nombre("Carolina")
+    			.primerApellido("Garzon")
+    			.segundoApellido("Becerra")
+    			.genero(Genero.MUJER)
+    			.fechaNacimiento(LocalDate.of(2001, Month.JUNE, 7))
+    			.dpto(Dpto.INFORMATICA)
+    			.salario(new BigDecimal(3700.50))
+    			.fechaAlta(LocalDate.of(2020, Month.SEPTEMBER, 10))
+    			.build();
+    	Empleado emp5 = Empleado.builder()
+    			.nombre("Mariana")
+    			.primerApellido("Garzon")
+    			.segundoApellido("Villar")
+    			.genero(Genero.MUJER)
+    			.fechaNacimiento(LocalDate.of(2000, Month.AUGUST, 4))
+    			.dpto(Dpto.FINANZAS)
+    			.salario(new BigDecimal(3300.50))
+    			.fechaAlta(LocalDate.of(2022, Month.SEPTEMBER, 25))
+    			.build();
+    	Empleado emp6 = Empleado.builder()
+    			.nombre("Francisca")
+    			.primerApellido("Alvarez")
+    			.segundoApellido("Gonzalez")
+    			.genero(Genero.MUJER)
+    			.fechaNacimiento(LocalDate.of(1995, Month.DECEMBER, 10))
+    			.dpto(Dpto.RRHH)
+    			.salario(new BigDecimal(2500.50))
+    			.fechaAlta(LocalDate.of(2010, Month.SEPTEMBER, 5))
+    			.build();
+    	Empleado emp7 = Empleado.builder()
+    			.nombre("Maricarmen")
+    			.primerApellido("Becerra")
+    			.segundoApellido("Martinez")
+    			.genero(Genero.MUJER)
+    			.fechaNacimiento(LocalDate.of(2003, Month.FEBRUARY, 14))
+    			.dpto(Dpto.FINANZAS)
+    			.salario(new BigDecimal(2600.50))
+    			.fechaAlta(LocalDate.of(2021, Month.SEPTEMBER, 8))
+    			.build();
+    	Empleado emp8 = Empleado.builder()
+    			.nombre("Eva")
+    			.primerApellido("Cornide")
+    			.segundoApellido("Machado")
+    			.genero(Genero.MUJER)
+    			.fechaNacimiento(LocalDate.of(1990, Month.MAY, 18))
+    			.dpto(Dpto.INFORMATICA)
+    			.salario(new BigDecimal(3500.50))
+    			.fechaAlta(LocalDate.of(2015, Month.SEPTEMBER, 22))
+    			.build();
+    	Empleado emp9 = Empleado.builder()
+    			.nombre("Alberto")
+    			.primerApellido("Gonzalez")
+    			.segundoApellido("Sanchez")
+    			.genero(Genero.HOMBRE)
+    			.fechaNacimiento(LocalDate.of(1990, Month.FEBRUARY, 14))
+    			.dpto(Dpto.FINANZAS)
+    			.salario(new BigDecimal(2600.50))
+    			.fechaAlta(LocalDate.of(2008, Month.SEPTEMBER, 8))
+    			.build();
+    	Empleado emp10 = Empleado.builder()
+    			.nombre("Javier")
+    			.primerApellido("Gonzalez")
+    			.segundoApellido("Sanchez")
+    			.genero(Genero.HOMBRE)
+    			.fechaNacimiento(LocalDate.of(1995, Month.MAY, 20))
+    			.dpto(Dpto.RRHH)
+    			.salario(new BigDecimal(3500.50))
+    			.fechaAlta(LocalDate.of(2015, Month.SEPTEMBER, 22))
+    			.build();
+    	
+    	// creamos la lista de empleados
+    	empleados = Arrays.asList(emp1, emp2, emp3, emp4, emp5, emp6, emp7, emp8, emp9, emp10);
+    	
+    	/* Crear una coleccion que agrupe (es un mapa, si agrupa = mapa) los emp por genero.
+    	 * Si uno esta empezando darle un nombre al mapa, luego con var es suficiente.
+    	 * Map java.util queremos agrupar por genero que será la clave y lo que almacenaremos en valor 
+    	 * seran los empleados de ese genero, más correcto una lista de los empleados de ese genero.
+    	 * recorremos los empleados creando un flujo con stream y los pillamos con collect, para agruparlos 
+    	 * después por genero y pasarselo a la clave del mapa y empleado va a la lista de los de ese genero y
+    	 * los del otro genero a otra lista. 
+    	 * groupingBy al ser un metodo map le quita un trozo al elemento que fluye por la tuberia
+    	 * es un metodo abstracto y necesita una lambda (metodo anonimo) para recibir lo que pasa por la tubería
+    	 * la Lambda le pide al elemento en este caso que le de su genero y así meterlo en la lista correcta, 
+    	 * la primera parte de la Lambda manda al empleado a la clave del mapa y la segunda coge el genero
+    	 * y otro collectors lo mete en valor
+    	 * 
+    	 * */
+    	
+    	/* Map<Genero, List<Empleado>> empleadosPorGenero = empleados.stream()
+    			.collect(Collectors.groupingBy(empleado -> empleado.getGenero(),
+    					Collectors.toList())); */
+    	
+    	/* Cuando se recorre una lista que es del mismo tipo que los elementos del valor del mapa, no hay q hacer
+    	 * absolutamente nada para que el elemento que circula por la tubería termine en la lista correspondiente 
+    	 * al valor de la entrada del mapa.*/
+    	
+    	Map<Genero, List<Empleado>> empleadosPorGenero = empleados.stream()
+    			.collect(Collectors.groupingBy(Persona::getGenero));
+    	
+    	
+    	System.out.println("Empleados por Genero: " + empleadosPorGenero);
+    	
     }
 }
