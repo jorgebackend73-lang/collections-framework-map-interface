@@ -100,10 +100,12 @@ public class App {
     	 * empleados
     	 * */
     	
-    	List<Empleado> empleados = new ArrayList<Empleado>(); // En List<? extends Persona> para meter cualquier tipo de dato Persona, genericidad
+    	// List<Empleado> empleados = new ArrayList<Empleado>(); // En List<? extends Persona> para meter cualquier tipo de dato Persona, genericidad
     	// si usamos esa genericidad tendriamos que poner un filtro al stream para que deje pasar
     	// solo los tipos de datos, empleados en este caso que buscamos.
     	
+    	// lista de cualquier cosa que herede de Persona. Super  para poder modificar, extends para inmutable.
+    	List<? extends Persona> listadoGenerico = new ArrayList<>();
     	
     	// creamos los empleados (objetos)
     	Empleado emp1 = Empleado.builder()
@@ -207,8 +209,30 @@ public class App {
     			.fechaAlta(LocalDate.of(2015, Month.SEPTEMBER, 22))
     			.build();
     	
-    	// creamos la lista de empleados
-    	empleados = Arrays.asList(emp1, emp2, emp3, emp4, emp5, emp6, emp7, emp8, emp9, emp10);
+    	Estudiante estudiante1 = Estudiante.builder()
+    			.nombre("Alex Eduardo")
+    			.primerApellido("Pilicita")
+    			.segundoApellido("Changoluisa")
+    			.genero(Genero.HOMBRE)
+    			.fechaNacimiento(LocalDate.of(1991, Month.MAY, 25))
+    			.facultad(Facultad.MEDICINA)
+    			.fechaAltaFacultad(LocalDate.of(2020, Month.JANUARY, 6))
+    			.build();
+    	
+    	
+    	// creamos la lista de empleados, Luego listadoGenerico es lista creada inmutable
+    	listadoGenerico = Arrays.asList(emp1,
+    			emp2,
+    			emp3,
+    			emp4,
+    			emp5,
+    			emp6,
+    			emp7,
+    			emp8,
+    			emp9,
+    			emp10);
+    	
+    	// listadoGenerico.add(emp1); // esto seria si usamos super en vez de extends arriba.
     	
     	/* Crear una coleccion que agrupe (es un mapa, si agrupa = mapa) los emp por genero.
     	 * Si uno esta empezando darle un nombre al mapa, luego con var es suficiente.
@@ -233,7 +257,17 @@ public class App {
     	 * absolutamente nada para que el elemento que circula por la tubería termine en la lista correspondiente 
     	 * al valor de la entrada del mapa.*/
     	
-    	Map<Genero, List<Empleado>> empleadosPorGenero = empleados.stream()
+    	/*Map<Genero, List<Empleado>> empleadosPorGenero = empleados.stream()
+    			.collect(Collectors.groupingBy(Persona::getGenero));
+    	
+    	
+    	System.out.println("Empleados por Genero: " + empleadosPorGenero); */
+    	
+    	// Como lo de antes pero aplicando filtro, pues al permitir que pase cualquier mierda que herede
+    	// de persona hay que filtrar a los empleados.
+    	Map<Genero, List<Empleado>> empleadosPorGenero = listadoGenerico.stream()
+    			.filter(obj -> obj instanceof Empleado) // hemos comprobado obj es una instancia de empleado y di pasa
+    			.map(obj -> (Empleado) obj) // hay que mapear el elemento para y para decir que el obj e obj lo casteamos a empleado
     			.collect(Collectors.groupingBy(Persona::getGenero));
     	
     	
