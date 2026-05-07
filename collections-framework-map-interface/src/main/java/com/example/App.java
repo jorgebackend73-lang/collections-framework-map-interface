@@ -107,6 +107,10 @@ public class App {
     	// lista de cualquier cosa que herede de Persona. Super  para poder modificar, extends para inmutable.
     	List<? extends Persona> listadoGenerico = new ArrayList<>();
     	
+    	// la declaración anterior todavía se puede resumir más, pq no es modificable
+    	// y no admite el metodo .add por haber usado estends en vez de super.
+    	// List<? extends Persona> listadoGenerico = null;
+    	
     	// creamos los empleados (objetos)
     	Empleado emp1 = Empleado.builder()
     			.nombre("Jorge Francisco")
