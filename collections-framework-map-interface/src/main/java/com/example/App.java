@@ -104,12 +104,14 @@ public class App {
     	// si usamos esa genericidad tendriamos que poner un filtro al stream para que deje pasar
     	// solo los tipos de datos, empleados en este caso que buscamos.
     	
-    	// lista de cualquier cosa que herede de Persona. Super  para poder modificar, extends para inmutable.
-    	List<? extends Persona> listadoGenerico = new ArrayList<>();
+    	// lista de cualquier cosa que herede de Persona. super  para poder modificar, extends para inmutable.
+    	// deesta forma reservamos espacio dinámico en memoria y hace posible usar el metodo .add 
+    	// para añadir elementos de forma dinámica a nuestra lista.
+    	// List<? super Persona> listadoGenerico = new ArrayList<>();
     	
     	// la declaración anterior todavía se puede resumir más, pq no es modificable
-    	// y no admite el metodo .add por haber usado estends en vez de super.
-    	// List<? extends Persona> listadoGenerico = null;
+    	// y no admite el metodo .add por haber usado extends en vez de super.
+    	List<? extends Persona> listadoGenerico = null;
     	
     	// creamos los empleados (objetos)
     	Empleado emp1 = Empleado.builder()
@@ -224,7 +226,8 @@ public class App {
     			.build();
     	
     	
-    	// creamos la lista de empleados, Luego listadoGenerico es lista creada inmutable
+    	// creamos la lista de empleados, Luego listadoGenerico es una lista creada
+    	// y es inmutable.
     	listadoGenerico = Arrays.asList(emp1,
     			emp2,
     			emp3,
@@ -237,6 +240,9 @@ public class App {
     			emp10);
     	
     	// listadoGenerico.add(emp1); // esto seria si usamos super en vez de extends arriba.
+    	// listadoGenerico.add(emp2);
+    	// listadoGenerico.add(emp3); // etc
+    	// al usar este metodo hay que usar un .add para añadir a cada empleado o elemento.
     	
     	/* Crear una coleccion que agrupe (es un mapa, si agrupa = mapa) los emp por genero.
     	 * Si uno esta empezando darle un nombre al mapa, luego con var es suficiente.
